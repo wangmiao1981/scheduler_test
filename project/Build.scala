@@ -37,20 +37,20 @@ object Resolvers {
 
 object Dependency {
     object Version {
-        val Spark        = "2.0.0"
+        val Spark        = "2.0.1"
         val Slf4jVersion = "1.7.12"
         val Log4jVersion = "1.2.17"
         val akkaV = "2.4.12"
     }
     
     val sparkCore = "org.apache.spark" %% "spark-core" % Version.Spark % "provided"
-    val sparkMl = "org.apache.spark" %% "spark-ml" % Version.Spark % "provided"
+    val sparkMl = "org.apache.spark" %% "spark-mllib" % Version.Spark % "provided"
 
     val akkaActor = "com.typesafe.akka" %% "akka-actor" % Version.akkaV 
 
     val configLib = "com.typesafe" % "config" % "1.2.1"
     val slf4j = "org.slf4j" % "slf4j-api" % Version.Slf4jVersion % "provided"
-    val log4jbind = "org.slf4j" % "slf4j-log4j12" % "1.7.12" % "provided"
+    val log4jbind = "org.slf4j" % "slf4j-log4j12" % "1.7.12" 
 }
 
 object Dependencies {
