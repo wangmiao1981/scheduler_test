@@ -50,14 +50,15 @@ object Dependency {
 
     val configLib = "com.typesafe" % "config" % "1.2.1"
     val slf4j = "org.slf4j" % "slf4j-api" % Version.Slf4jVersion % "provided"
-    val log4jbind = "org.slf4j" % "slf4j-log4j12" % "1.7.12" 
+    val log4jbind = "org.slf4j" % "slf4j-log4j12" % "1.7.12"
+    val kafkaClient = "net.cakesolutions" %% "scala-kafka-client" % "0.10.0.0" 
 }
 
 object Dependencies {
     import Dependency._
     
     val generatorDependencies = Seq(sparkCore, sparkMl, configLib, slf4j,
-                                    log4jbind, akkaActor)
+                                    log4jbind, akkaActor, kafkaClient)
 }
 
 object SparkTestBuild extends Build {
