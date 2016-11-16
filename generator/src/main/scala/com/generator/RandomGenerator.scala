@@ -22,9 +22,17 @@ class RandomGenerator extends Generator {
   val objBuffer: Array[JsValue] = new Array[JsValue](1000)
 
   private def initObjBuffer(): Unit = {
-    val line = Source.fromFile(sourceURI).getLines()
-    for ( i <- 0 to 999) {
-      objBuffer(i) = Json.parse(line.next())
+    val sourceFile = Source.fromFile(sourceURI)
+    val line = sourceFile.getLines()
+    try {
+      for (i <- 0 to 999) {
+        objBuffer(i) = Json.parse(line.next())
+      }
+    } catch {
+      case e: Exception =>
+        logError(s"initiObjBuffer Error")
+    } finally {
+      sourceFile.close()
     }
   }
 

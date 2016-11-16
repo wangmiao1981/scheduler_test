@@ -66,7 +66,7 @@ trait Logging {
     log.isTraceEnabled
   }
 
-  private def LogInit: Unit = {
+  private def LogInit(): Unit = {
     if (!Logging.initialized) {
       Logging.initLock.synchronized {
         if (!Logging.initialized) {
@@ -76,7 +76,7 @@ trait Logging {
     }
   }
 
-  private def LogInitAction: Unit = {
+  private def LogInitAction(): Unit = {
     val binderClass = StaticLoggerBinder.getSingleton.getLoggerFactoryClassStr
     val usingLog4j12 = "org.slf4j.impl.Log4jLoggerFactory".equals(binderClass)
     if (usingLog4j12) {
