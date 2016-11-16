@@ -1,9 +1,18 @@
 package com.generator
 
-object GeneratorMethod extends Enumeration {
-  type GeneratorMethod = Value
-  val RandomFile, RandomLive, SeqLive, SeqFile = Value
-}
+/*
+ * Generator class defines the interfaces of traffic generator
+ * 1). Initialization: Set Source Name, Source URI and Clock;
+ * 2). Start: Enters a loop to generate records periodically.
+ *     The destination of a generated record is provided by the Sink.
+ *     Now, the Sink is a Kafka client, which submits the record to a
+ *     Kafka Cluster. The record is in the tuple (timestamp, JsObject).
+ * 3). Stop: Stop the generator and release resources
+ *
+ * For a concreate generator, it inherits the abstract class and implement
+ * Source, start(), stop() methods.
+ *
+ */
 
 trait Source {
   val sourceName: String
@@ -20,23 +29,7 @@ abstract class Generator(genConf: GenConf) extends Logging with Source {
 
   val startTime = System.currentTimeMillis()
 
-  var interval: Int
-
-  def setInterval(value: Int) = {
-    interval = value
-  }
-
-  def getInterval: Int = interval
-
-  var generateMethod: Enumeration
-
-  def setGenerateMethod(method: Enumeration) = {
-    generateMethod = method
-  }
-
-  def getGenerateMethod(): Enumeration =  generateMethod
-
-  def initGenerator(): Unit
+  var interval: Int = GenConf.intervalConfig.getInt("interval")
 
   def start()
 

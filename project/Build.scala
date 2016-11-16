@@ -41,6 +41,8 @@ object Dependency {
         val Slf4jVersion = "1.7.12"
         val Log4jVersion = "1.2.17"
         val akkaV = "2.4.12"
+        val kafkaVersion = "0.10.0.0"
+        val playVersion = "2.5.0"
     }
     
     val sparkCore = "org.apache.spark" %% "spark-core" % Version.Spark % "provided"
@@ -51,14 +53,16 @@ object Dependency {
     val configLib = "com.typesafe" % "config" % "1.2.1"
     val slf4j = "org.slf4j" % "slf4j-api" % Version.Slf4jVersion % "provided"
     val log4jbind = "org.slf4j" % "slf4j-log4j12" % "1.7.12"
-    val kafkaClient = "net.cakesolutions" %% "scala-kafka-client" % "0.10.0.0" 
+    val kafkaClient = "net.cakesolutions" %% "scala-kafka-client" % Version.kafkaVersion
+
+    val playJson       = "com.typesafe.play" %% "play-json" % Version.playVersion 
 }
 
 object Dependencies {
     import Dependency._
     
     val generatorDependencies = Seq(sparkCore, sparkMl, configLib, slf4j,
-                                    log4jbind, akkaActor, kafkaClient)
+                                    log4jbind, akkaActor, kafkaClient, playJson)
 }
 
 object SparkTestBuild extends Build {
