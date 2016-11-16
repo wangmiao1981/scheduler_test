@@ -19,9 +19,7 @@ trait Source {
   val sourceURI: String
 }
 
-abstract class Generator(genConf: GenConf) extends Logging with Source {
-
-  def this() = this(new GenConf())
+abstract class Generator() extends Logging with Source {
 
   override val sourceName: String
 
@@ -29,7 +27,7 @@ abstract class Generator(genConf: GenConf) extends Logging with Source {
 
   val startTime = System.currentTimeMillis()
 
-  var interval: Int = GenConf.intervalConfig.getInt("interval")
+//  var interval: Int = GenConf.intervalConfig.getInt("interval")
 
   def start()
 

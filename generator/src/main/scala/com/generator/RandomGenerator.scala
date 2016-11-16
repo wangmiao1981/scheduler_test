@@ -21,11 +21,15 @@ class RandomGenerator extends Generator {
    */
   val objBuffer: Array[JsValue] = new Array[JsValue](1000)
 
-  override def start(): Unit = {
-    for (line <- Source.fromFile(sourceURI).getLines(); i <- 0 to 999) {
-      objBuffer(i) = Json.parse(line)
-
+  private def initObjBuffer(): Unit = {
+    val line = Source.fromFile(sourceURI).getLines()
+    for ( i <- 0 to 999) {
+      objBuffer(i) = Json.parse(line.next())
     }
+  }
+
+  override def start(): Unit = {
+    initObjBuffer()
     task = new TimerTask {
       override def run(): Unit = generateTweets()
     }
@@ -39,7 +43,7 @@ class RandomGenerator extends Generator {
   override val sourceURI: String = "/Users/mwang/Downloads/tweetsMixSample"
 
   def generateTweets() = {
-    val index = new Random(1234L).nextInt(999)
+    val index = new Random().nextInt(999)
     require(index >=0 && index <= 999, "The random index is out of range.")
     objBuffer(index)
   }
